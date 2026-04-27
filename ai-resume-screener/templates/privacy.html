@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy - Resume Screener AI</title>
+  <style>
+    body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#080c14; color:#e5e7eb; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 28px 16px 40px; }
+    a { color: #22d3ee; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 18px; }
+    h1 { margin: 0 0 10px; font-size: 1.8rem; }
+    h2 { margin: 18px 0 8px; font-size: 1.1rem; }
+    p, li { color: #cbd5e1; line-height: 1.6; }
+    code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 8px; }
+    .muted { color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Privacy</h1>
+      <p class="muted">Last updated: 2026-04-27</p>
+
+      <h2>What this app does</h2>
+      <p>This app compares a resume PDF against a job description and returns a score, matching/missing skills, suggestions, and (when available) evidence.</p>
+
+      <h2>What data is sent to the AI model</h2>
+      <ul>
+        <li>If the LLM is used, the app sends <strong>redacted</strong> resume text and job description text to Gemini.</li>
+        <li>Redaction removes common identifiers like emails, phone numbers, and URLs (replaced with placeholders like <code>[EMAIL]</code>, <code>[PHONE]</code>, <code>[URL]</code>).</li>
+      </ul>
+
+      <h2>What is stored</h2>
+      <ul>
+        <li>Your uploaded PDF is stored only as a temporary file during processing and is deleted after the job finishes.</li>
+        <li>The server keeps a short-lived in-memory job/result record for polling (expires automatically).</li>
+      </ul>
+
+      <h2>Bring Your Own (BYO) API key</h2>
+      <ul>
+        <li>You can paste your own Gemini API key in the UI.</li>
+        <li>The key is saved in your browser only (localStorage) and sent to the server per request using the <code>X-Gemini-Api-Key</code> header.</li>
+        <li>If the server is configured with a background queue (Redis/RQ), your request (including the key) may be held briefly while processing, then discarded.</li>
+      </ul>
+
+      <h2>Limits</h2>
+      <ul>
+        <li>No system can guarantee perfect accuracy. Always verify important details.</li>
+        <li>If Gemini rate-limits or is unavailable, the app returns a local fallback analysis.</li>
+      </ul>
+
+      <p><a href="/">Back to app</a></p>
+    </div>
+  </div>
+</body>
+</html>
