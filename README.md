@@ -2,7 +2,7 @@
 title: AI Resume Screener
 emoji: "📝"
 colorFrom: indigo
-colorTo: teal
+colorTo: blue
 sdk: docker
 app_port: 7860
 pinned: false
