@@ -4,6 +4,7 @@ import hashlib
 import threading
 import json
 import uuid
+import warnings
 
 # Optional Redis + RQ (recommended for production)
 try:
@@ -21,8 +22,11 @@ except Exception:
 os.environ.setdefault("USE_TF", "0")
 os.environ.setdefault("TRANSFORMERS_NO_TF", "1")
 
+# Silence a noisy pydantic warning triggered by google.genai imports.
+warnings.filterwarnings("ignore", message=".*ArbitraryTypeWarning.*", category=UserWarning)
+
 from flask import Flask, Response, jsonify, render_template, request
-import google.generativeai as genai
+import google.genai as genai
 from google.api_core import exceptions as gexc
 import fitz  # PyMuPDF
 from sentence_transformers import SentenceTransformer, util
@@ -345,7 +349,7 @@ Constraints:
             )
         _gemini_last_call_ts = now
 
-        genai.configure(api_key=api_key)
+        client = genai.Client(api_key=api_key)
         # Try a small set of compatible model IDs because availability can vary
         # by account, API version, and rollout status.
         model_candidates = [
@@ -356,10 +360,10 @@ Constraints:
 
         for model_name in model_candidates:
             try:
-                model = genai.GenerativeModel(model_name)
-                response = model.generate_content(
-                    prompt,
-                    generation_config={
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config={
                         "temperature": 0.2,
                         "max_output_tokens": 1200,
                     },
