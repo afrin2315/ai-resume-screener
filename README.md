@@ -12,11 +12,15 @@ pinned: false
 
 An AI-powered resume screening web app that compares a **resume PDF** against a **job description** and returns a fit score, skill gaps, and concrete improvement suggestions — with an optional **evidence** section for transparency.
 
+![AI Resume Screener UI](assets/preview.png)
+
 Built for real-world demo/public usage:
 - **Graceful under load:** async jobs + polling (no long request timeouts)
 - **Doesn’t “break” on quota:** local fallback analysis when Gemini rate-limits/unavailable
 - **BYO API key:** users can paste their own Gemini key to avoid shared-quota limits
 - **Privacy-first:** common PII is redacted before sending text to the LLM
+
+**Live demo:** https://huggingface.co/spaces/Afrin18/ai-resume-screener
 
 ---
 

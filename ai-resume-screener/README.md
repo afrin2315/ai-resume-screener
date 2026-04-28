@@ -2,10 +2,14 @@
 
 AI Resume Screener is a Flask web app that compares a **resume PDF** against a **job description** and returns a fit score, skill gaps, suggestions, and (when the LLM is available) **evidence-backed** insights.
 
+![AI Resume Screener UI](../assets/preview.png)
+
 It’s built to be safe to demo publicly:
 - Works even when Gemini rate-limits (falls back to local analysis)
 - Supports **BYO (Bring Your Own) Gemini API key** in the UI to avoid shared quota issues
 - Redacts common PII before sending text to the LLM
+
+**Live demo:** https://huggingface.co/spaces/Afrin18/ai-resume-screener
 
 ## Features
 
